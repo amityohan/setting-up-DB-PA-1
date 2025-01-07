@@ -1,8 +1,10 @@
 const express = require('express');
 const { resolve } = require('path');
+const env=require('dotenv');
 
 const app = express();
-const port = 3010;
+const port = process.env.PORT;
+const connectDatabase=require('./database.js')
 
 app.use(express.static('static'));
 
@@ -11,5 +13,6 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
+  connectDatabase()
   console.log(`Example app listening at http://localhost:${port}`);
 });
